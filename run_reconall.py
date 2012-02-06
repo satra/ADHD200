@@ -4,6 +4,7 @@ import os
 import numpy as np
 
 fl = glob('/g2/users/satra/ADHD200/testdata/*anat*.gz')
+fl = glob('/g2/users/satra/ADHD200/traindata/*anat*.gz')
 
 sids = [f.split('_')[0].split('/')[-1] for f in fl]
 
@@ -21,15 +22,19 @@ for idx, s in enumerate(sids):
     newsubjects.append(s)
     newfiles.append(fl[idx])
 
-#newfiles = newfiles[:5]
-#newsubjects = newsubjects[:5]
+newfiles = newfiles
+newsubjects = newsubjects
 
-print len(newfiles)
+#print len(newfiles)
+print '\n'.join(newfiles)
+'''
 if newfiles:
     """
+    os.system('/software/common/bin/recon-all-pbs -q gablab -m satrajit.ghosh@gmail.com -a "-l nodes=mh21+mh18+mh19" -s %s -f %s' % \
+                  (' '.join(newsubjects), ' '.join(newfiles)))
     os.system('/software/common/bin/recon-all-pbs -q gablab -m satrajit.ghosh@gmail.com -a "-l nodes=mh18+mh19+mh20+mh21" -s %s -f %s' % \
                   (' '.join(newsubjects), ' '.join(newfiles)))
     """
     os.system('/software/common/bin/recon-all-pbs -q gablab -m satrajit.ghosh@gmail.com -s %s -f %s' % \
                   (' '.join(newsubjects), ' '.join(newfiles)))
-
+'''
